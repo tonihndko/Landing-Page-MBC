@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MBC Laboratory - Mitra Transformasi Digital Anda</title>
+
+    <!-- 
+    =========================================================================
+    SPESIFIKASI TEKNIS PROYEK
+    =========================================================================
+    Berdasarkan panduan yang diberikan:
+
+    - Frontend: 
+        - Teknologi: HTML5, CSS3, JavaScript.
+        - Framework: TailwindCSS (digunakan di sini). Bootstrap adalah alternatif.
+        - Opsional: React/Next.js untuk pengembangan lebih lanjut.
+
+    - Backend:
+        - Tujuan: Menangani fungsionalitas dinamis seperti formulir kontak.
+        - Teknologi: Node.js + Express (dengan Nodemailer) atau PHP.
+        - Integrasi: Terhubung ke backend untuk mengirim email dari form kontak.
+
+    - Deployment:
+        - Platform: Wajib menggunakan platform cloud.
+        - Contoh: Vercel, Netlify, GCP, AWS, atau Azure.
+
+    - SSL (HTTPS):
+        - Keamanan: Sertifikasi keamanan HTTPS wajib tersedia.
+        - Implementasi: Bisa otomatis dari platform (Vercel/Netlify) atau manual (Certbot).
+
+    - Domain:
+        - Rekomendasi: Penggunaan domain kustom untuk profesionalisme.
+
+    - IDS (Opsional):
+        - Keamanan Lanjutan: Simulasi atau integrasi Intrusion Detection System.
+        - Contoh: Snort atau Wazuh.
+
+    - Responsivitas:
+        - Desain: Wajib mobile-friendly dengan prinsip desain adaptif.
+        - Aksesibilitas: Memastikan aksesibilitas yang baik.
+    =========================================================================
+    -->
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Lucide Icons via CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Konfigurasi Kustom untuk Tailwind -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+            colors: {
+              // Palet Warna Gradasi Merah Baru
+              "brand-primary": "#640D14", // Merah Tua Pekat
+              "brand-secondary": "#AD2831", // Merah Terang
+              "brand-accent": "#E63946", // Aksen Merah Cerah
+              "brand-light": "#FEF2F2", // Latar Belakang Merah Muda Pucat
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Gaya Tambahan -->
+    <style>
+      .nav-link.active {
+        color: #e63946; /* Warna aksen baru */
+        font-weight: 600;
+      }
+      .section-title {
+        @apply text-3xl font-bold text-brand-primary mb-4 text-center sm:text-4xl;
+      }
+      .section-subtitle {
+        @apply text-lg text-gray-600 mb-12 text-center max-w-3xl mx-auto;
+      }
+    </style>
+  </head>
+  <body class="bg-brand-light font-sans text-gray-800">
+    <!-- ===== HEADER & NAVIGASI ===== -->
+    <header
+      id="header"
+      class="bg-white/80 backdrop-blur-sm fixed top-0 left-0 w-full z-50 shadow-md transition-all duration-300"
+    >
+      <div
+        class="container mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <a href="#home" class="text-2xl font-bold text-brand-primary">
+          MBC<span class="text-brand-secondary">Lab</span>
+        </a>
+
+        <!-- Navigasi Desktop -->
+        <nav class="hidden md:flex items-center space-x-8">
+          <a
+            href="#home"
+            class="nav-link text-gray-600 hover:text-brand-accent transition-colors duration-300"
+            >Home</a
+          >
+          <a
+            href="#layanan"
+            class="nav-link text-gray-600 hover:text-brand-accent transition-colors duration-300"
+            >Layanan</a
+          >
+          <a
+            href="#kontak"
+            class="nav-link text-gray-600 hover:text-brand-accent transition-colors duration-300"
+            >Kontak</a
+          >
+          <a
+            href="#developer"
+            class="nav-link text-gray-600 hover:text-brand-accent transition-colors duration-300"
+            >Developer</a
+          >
+        </nav>
+
+        <a
+          href="#kontak"
+          class="hidden md:inline-block bg-brand-secondary text-white font-semibold px-5 py-2 rounded-lg hover:bg-opacity-90 transition-all duration-300 shadow-sm"
+        >
+          Hubungi Kami
+        </a>
+
+        <!-- Tombol Menu Mobile -->
+        <button
+          id="menu-btn"
+          class="md:hidden text-brand-primary focus:outline-none"
+        >
+          <i data-lucide="menu" class="w-7 h-7"></i>
+        </button>
+      </div>
+
+      <!-- Menu Mobile -->
+      <div id="mobile-menu" class="hidden md:hidden">
+        <nav class="px-6 pt-2 pb-4 space-y-2">
+          <a
+            href="#home"
+            class="block nav-link text-gray-600 hover:text-brand-accent transition-colors duration-300 py-2"
+            >Home</a
+          >
+          <a
+            href="#layanan"
+            class="block nav-link text-gray-600 hover:text-brand-accent transition-colors duration-300 py-2"
+            >Layanan</a
+          >
+          <a
+            href="#kontak"
+            class="block nav-link text-gray-600 hover:text-brand-accent transition-colors duration-300 py-2"
+            >Kontak</a
+          >
+          <a
+            href="#developer"
+            class="block nav-link text-gray-600 hover:text-brand-accent transition-colors duration-300 py-2"
+            >Developer</a
+          >
+          <a
+            href="#kontak"
+            class="block mt-4 w-full text-center bg-brand-secondary text-white font-semibold px-5 py-2 rounded-lg hover:bg-opacity-90 transition-all duration-300 shadow-sm"
+          >
+            Hubungi Kami
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- ===== BAGIAN 1: HALAMAN UTAMA (HOME) ===== -->
+      <section id="home" class="pt-24 md:pt-32 pb-16 bg-white">
+        <div class="container mx-auto px-6">
+          <!-- Hero Section -->
+          <div class="text-center">
+            <h1
+              class="text-4xl md:text-6xl font-extrabold text-brand-primary leading-tight mb-4"
+            >
+              Inovasi Digital untuk
+              <span class="text-brand-secondary">Masa Depan</span>
+            </h1>
+            <p class="max-w-4xl mx-auto text-lg md:text-xl text-gray-600 mb-8">
+              MBC Laboratory mengubah data menjadi keputusan, ide menjadi
+              pengalaman, dan risiko menjadi keamanan melalui solusi teknologi
+              terdepan.
+            </p>
+            <a
+              href="#layanan"
+              class="bg-brand-accent text-white font-bold px-8 py-3 rounded-lg hover:bg-opacity-90 transition-transform duration-300 inline-block shadow-lg"
+            >
+              Jelajahi Layanan Kami
+            </a>
+          </div>
+
+          <!-- Visi & Misi -->
+          <div
+            class="mt-20 md:mt-28 grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
+          >
+            <div class="text-center md:text-left">
+              <h2 class="text-3xl font-bold text-brand-primary mb-4">
+                Tentang MBC Laboratory
+              </h2>
+              <p class="text-gray-600 mb-6">
+                Kami adalah laboratorium inovasi yang berfokus pada pengembangan
+                solusi teknologi canggih untuk menjawab tantangan industri
+                modern. Dengan tim ahli yang bersemangat, kami berkomitmen untuk
+                memberikan hasil yang tidak hanya memenuhi, tetapi melampaui
+                ekspektasi klien.
+              </p>
+            </div>
+            <div class="space-y-6">
+              <div>
+                <h3
+                  class="text-2xl font-semibold text-brand-secondary mb-2 flex items-center gap-3"
+                >
+                  <i data-lucide="eye" class="w-7 h-7 text-brand-accent"></i>
+                  Visi Kami
+                </h3>
+                <p class="text-gray-600">
+                  Menjadi mitra inovasi digital terdepan di Indonesia yang
+                  mendorong transformasi dan pertumbuhan berkelanjutan bagi
+                  klien kami.
+                </p>
+              </div>
+              <div>
+                <h3
+                  class="text-2xl font-semibold text-brand-secondary mb-2 flex items-center gap-3"
+                >
+                  <i data-lucide="target" class="w-7 h-7 text-brand-accent"></i>
+                  Misi Kami
+                </h3>
+                <ul class="list-disc list-inside text-gray-600 space-y-1">
+                  <li>
+                    Mengembangkan solusi andal di bidang Cybersecurity, Big
+                    Data, Game Tech, dan GIS.
+                  </li>
+                  <li>Menyediakan layanan konsultasi ahli untuk klien.</li>
+                  <li>
+                    Membangun ekosistem talenta digital yang kompeten dan
+                    berintegritas.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== BAGIAN 2: DIVISI DAN LAYANAN ===== -->
+      <section id="layanan" class="py-20">
+        <div class="container mx-auto px-6">
+          <h2 class="section-title">Divisi & Layanan Unggulan</h2>
+          <p class="section-subtitle">
+            Kami menyediakan keahlian di empat pilar teknologi utama. Temukan
+            bagaimana setiap divisi dapat membantu organisasi Anda mencapai
+            tujuan strategis.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Kartu Layanan 1: Cybersecurity -->
+            <div
+              class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-t-4 border-brand-accent"
+            >
+              <div
+                class="bg-brand-accent/10 w-16 h-16 rounded-full flex items-center justify-center mb-6"
+              >
+                <i
+                  data-lucide="shield-check"
+                  class="w-8 h-8 text-brand-accent"
+                ></i>
+              </div>
+              <h3 class="text-xl font-bold text-brand-primary mb-3">
+                Cybersecurity
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Melindungi aset digital Anda dari ancaman siber dengan layanan
+                keamanan proaktif dan responsif.
+              </p>
+              <p class="text-sm text-gray-500">
+                <b class="text-brand-secondary">Aplikasi:</b> Vulnerability
+                Assessment, Network Security, Digital Forensics.
+              </p>
+            </div>
+            <!-- Kartu Layanan 2: Big Data -->
+            <div
+              class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-t-4 border-brand-accent"
+            >
+              <div
+                class="bg-brand-accent/10 w-16 h-16 rounded-full flex items-center justify-center mb-6"
+              >
+                <i
+                  data-lucide="database-zap"
+                  class="w-8 h-8 text-brand-accent"
+                ></i>
+              </div>
+              <h3 class="text-xl font-bold text-brand-primary mb-3">
+                Big Data
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Mengubah kumpulan data besar menjadi wawasan yang dapat
+                ditindaklanjuti untuk keputusan cerdas.
+              </p>
+              <p class="text-sm text-gray-500">
+                <b class="text-brand-secondary">Aplikasi:</b> Business
+                Intelligence, Predictive Analytics, Data Warehousing.
+              </p>
+            </div>
+            <!-- Kartu Layanan 3: Game Technology -->
+            <div
+              class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-t-4 border-brand-accent"
+            >
+              <div
+                class="bg-brand-accent/10 w-16 h-16 rounded-full flex items-center justify-center mb-6"
+              >
+                <i
+                  data-lucide="gamepad-2"
+                  class="w-8 h-8 text-brand-accent"
+                ></i>
+              </div>
+              <h3 class="text-xl font-bold text-brand-primary mb-3">
+                Game Technology
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Menciptakan pengalaman interaktif yang imersif melalui
+                gamifikasi, simulasi, dan VR.
+              </p>
+              <p class="text-sm text-gray-500">
+                <b class="text-brand-secondary">Aplikasi:</b> Corporate
+                Training, Gamified Marketing, VR Experiences.
+              </p>
+            </div>
+            <!-- Kartu Layanan 4: GIS -->
+            <div
+              class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-t-4 border-brand-accent"
+            >
+              <div
+                class="bg-brand-accent/10 w-16 h-16 rounded-full flex items-center justify-center mb-6"
+              >
+                <i data-lucide="map" class="w-8 h-8 text-brand-accent"></i>
+              </div>
+              <h3 class="text-xl font-bold text-brand-primary mb-3">GIS</h3>
+              <p class="text-gray-600 mb-4">
+                Memberikan konteks spasial pada data Anda untuk analisis
+                berbasis lokasi yang mendalam.
+              </p>
+              <p class="text-sm text-gray-500">
+                <b class="text-brand-secondary">Aplikasi:</b> Spatial Analysis,
+                Asset Tracking, Site Selection.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== BAGIAN 3: HALAMAN KONTAK ===== -->
+      <section id="kontak" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+          <h2 class="section-title">Hubungi Kami</h2>
+          <p class="section-subtitle">
+            Punya pertanyaan atau ide proyek? Tim kami siap membantu Anda.
+            Hubungi kami melalui informasi di bawah ini atau kirim pesan melalui
+            formulir kontak.
+          </p>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Informasi Kontak & Peta -->
+            <div>
+              <div class="space-y-6">
+                <div class="flex items-start gap-4">
+                  <i
+                    data-lucide="map-pin"
+                    class="w-6 h-6 text-brand-secondary mt-1"
+                  ></i>
+                  <div>
+                    <h4 class="font-semibold text-lg text-brand-primary">
+                      Alamat Kantor
+                    </h4>
+                    <p class="text-gray-600">
+                      Jl. Inovasi Digital No. 123, Jakarta, 12345, Indonesia
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <i
+                    data-lucide="mail"
+                    class="w-6 h-6 text-brand-secondary mt-1"
+                  ></i>
+                  <div>
+                    <h4 class="font-semibold text-lg text-brand-primary">
+                      Email
+                    </h4>
+                    <p class="text-gray-600">info@mbclaboratory.com</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <i
+                    data-lucide="phone"
+                    class="w-6 h-6 text-brand-secondary mt-1"
+                  ></i>
+                  <div>
+                    <h4 class="font-semibold text-lg text-brand-primary">
+                      Telepon
+                    </h4>
+                    <p class="text-gray-600">+62 21 1234 5678</p>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-8 rounded-lg overflow-hidden shadow-lg">
+                <!-- Ganti URL ini dengan URL embed dari Google Maps Anda -->
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.576891381987!2d106.82458407475215!3d-6.187333393800236!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f42369415c57%3A0x76c33c563b74032!2sMonumen%20Nasional!5e0!3m2!1sid!2sid!4v1672560000000!5m2!1sid!2sid"
+                  width="100%"
+                  height="300"
+                  style="border: 0"
+                  allowfullscreen=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                >
+                </iframe>
+              </div>
+            </div>
+            <!-- Formulir Kontak -->
+            <div class="bg-brand-light p-8 rounded-xl shadow-inner border">
+              <h3 class="text-2xl font-bold text-brand-primary mb-6">
+                Kirim Pesan Cepat
+              </h3>
+              <form action="#" method="POST" class="space-y-6">
+                <div>
+                  <label
+                    for="name"
+                    class="block text-sm font-medium text-gray-700 mb-1"
+                    >Nama Lengkap</label
+                  >
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-brand-secondary focus:border-brand-secondary transition"
+                  />
+                </div>
+                <div>
+                  <label
+                    for="email"
+                    class="block text-sm font-medium text-gray-700 mb-1"
+                    >Alamat Email</label
+                  >
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-brand-secondary focus:border-brand-secondary transition"
+                  />
+                </div>
+                <div>
+                  <label
+                    for="subject"
+                    class="block text-sm font-medium text-gray-700 mb-1"
+                    >Subjek</label
+                  >
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-brand-secondary focus:border-brand-secondary transition"
+                  />
+                </div>
+                <div>
+                  <label
+                    for="message"
+                    class="block text-sm font-medium text-gray-700 mb-1"
+                    >Pesan Anda</label
+                  >
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="5"
+                    required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-brand-secondary focus:border-brand-secondary transition"
+                  ></textarea>
+                </div>
+                <div>
+                  <button
+                    type="submit"
+                    class="w-full bg-brand-secondary text-white font-bold py-3 px-6 rounded-lg hover:bg-opacity-90 transition-all duration-300 shadow-md"
+                  >
+                    Kirim Pesan
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== BAGIAN 4: HALAMAN DEVELOPER ===== -->
+      <section id="developer" class="py-20">
+        <div class="container mx-auto px-6">
+          <h2 class="section-title">Profil Pengembang</h2>
+          <p class="section-subtitle">
+            Website ini dirancang dan dikembangkan dengan dedikasi untuk
+            memberikan pengalaman pengguna terbaik sebagai wujud transparansi
+            dan akuntabilitas kami.
+          </p>
+          <div
+            class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg flex flex-col sm:flex-row items-center gap-8 border"
+          >
+            <img
+              src="https://placehold.co/150x150/640D14/FFFFFF?text=Dev"
+              alt="Foto Developer"
+              class="w-36 h-36 rounded-full object-cover shadow-md flex-shrink-0"
+            />
+            <div class="text-center sm:text-left">
+              <h3 class="text-2xl font-bold text-brand-primary">
+                Nama Developer
+              </h3>
+              <p class="text-brand-secondary font-semibold mb-3">
+                Full-Stack Developer
+              </p>
+              <p class="text-gray-600 mb-4">
+                Seorang pengembang web dengan hasrat untuk menciptakan aplikasi
+                yang fungsional, bersih, dan aman. Berfokus pada teknologi
+                modern untuk memberikan solusi digital yang efisien.
+              </p>
+              <div class="mb-4">
+                <h4 class="font-semibold text-gray-700 mb-2">
+                  Kompetensi Teknis:
+                </h4>
+                <div
+                  class="flex flex-wrap gap-2 justify-center sm:justify-start"
+                >
+                  <span
+                    class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                    >HTML & CSS</span
+                  >
+                  <span
+                    class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                    >JavaScript</span
+                  >
+                  <span
+                    class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                    >Node.js</span
+                  >
+                  <span
+                    class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                    >PHP</span
+                  >
+                  <span
+                    class="bg-sky-100 text-sky-800 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                    >React</span
+                  >
+                  <span
+                    class="bg-gray-200 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                    >SQL</span
+                  >
+                </div>
+              </div>
+              <div
+                class="flex items-center justify-center sm:justify-start space-x-4"
+              >
+                <a
+                  href="#"
+                  target="_blank"
+                  class="text-gray-500 hover:text-brand-secondary"
+                  ><i data-lucide="github" class="w-6 h-6"></i
+                ></a>
+                <a
+                  href="#"
+                  target="_blank"
+                  class="text-gray-500 hover:text-brand-secondary"
+                  ><i data-lucide="linkedin" class="w-6 h-6"></i
+                ></a>
+                <a
+                  href="#"
+                  target="_blank"
+                  class="text-gray-500 hover:text-brand-secondary"
+                  ><i data-lucide="globe" class="w-6 h-6"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="bg-brand-primary text-white">
+      <div class="container mx-auto px-6 py-6 text-center">
+        <p>
+          &copy; <span id="year"></span> MBC Laboratory. All Rights Reserved.
+        </p>
+      </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+      // Inisialisasi Lucide Icons
+      lucide.createIcons();
+
+      // Logika untuk Menu Mobile
+      const menuBtn = document.getElementById("menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+
+      // Menutup menu mobile saat link di-klik
+      document.querySelectorAll("#mobile-menu a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.add("hidden");
+        });
+      });
+
+      // Logika untuk Navigasi Aktif saat Scroll
+      const sections = document.querySelectorAll("section");
+      const navLinks = document.querySelectorAll(".nav-link");
+
+      const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.4, // 40% dari section harus terlihat
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            navLinks.forEach((link) => {
+              link.classList.remove("active");
+              if (link.getAttribute("href").substring(1) === entry.target.id) {
+                link.classList.add("active");
+              }
+            });
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach((section) => {
+        observer.observe(section);
+      });
+
+      // Set tahun di footer secara dinamis
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
