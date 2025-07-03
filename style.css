@@ -1,15 +1,44 @@
 /* Gaya navigasi aktif */
 .nav-link.active {
-  color: #e63946; /* Warna aksen baru */
+  color: #7e5255; /* Warna aksen baru */
   font-weight: 600;
 }
 
 /* Gaya judul section */
 .section-title {
-  @apply text-3xl font-bold text-brand-primary mb-4 text-center sm:text-4xl;
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 700; /* font-bold */
+  color: transparent;
+  margin-bottom: 1rem;
+  text-align: center;
+  background: linear-gradient(90deg, #e63946 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* Gaya subjudul section */
 .section-subtitle {
-  @apply text-lg text-gray-600 mb-12 text-center max-w-3xl mx-auto;
+  font-size: 1.125rem; /* text-lg */
+  color: #64748b; /* text-gray-600 */
+  margin-bottom: 3rem;
+  text-align: center;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body.bg-brand-light {
+  background: linear-gradient(135deg, #e63946 0%, #3b82f6 100%);
+}
+
+/* Card layanan border dan hover gradasi */
+.border-brand-accent {
+  border-top: 4px solid #e63946;
+  border-image: linear-gradient(90deg, #e63946 0%, #3b82f6 100%);
+  border-image-slice: 1;
+}
+
+.bg-brand-light {
+  background: #f0f6ff;
 }

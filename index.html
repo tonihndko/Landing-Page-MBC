@@ -3,49 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MBC Laboratory - Mitra Transformasi Digital Anda</title>
+    <title>MBC Laboratory - Telkom University</title>
 
-    <!-- 
-    =========================================================================
-    SPESIFIKASI TEKNIS PROYEK
-    =========================================================================
-    Berdasarkan panduan yang diberikan:
-
-    - Frontend: 
-        - Teknologi: HTML5, CSS3, JavaScript.
-        - Framework: TailwindCSS (digunakan di sini). Bootstrap adalah alternatif.
-        - Opsional: React/Next.js untuk pengembangan lebih lanjut.
-
-    - Backend:
-        - Tujuan: Menangani fungsionalitas dinamis seperti formulir kontak.
-        - Teknologi: Node.js + Express (dengan Nodemailer) atau PHP.
-        - Integrasi: Terhubung ke backend untuk mengirim email dari form kontak.
-
-    - Deployment:
-        - Platform: Wajib menggunakan platform cloud.
-        - Contoh: Vercel, Netlify, GCP, AWS, atau Azure.
-
-    - SSL (HTTPS):
-        - Keamanan: Sertifikasi keamanan HTTPS wajib tersedia.
-        - Implementasi: Bisa otomatis dari platform (Vercel/Netlify) atau manual (Certbot).
-
-    - Domain:
-        - Rekomendasi: Penggunaan domain kustom untuk profesionalisme.
-
-    - IDS (Opsional):
-        - Keamanan Lanjutan: Simulasi atau integrasi Intrusion Detection System.
-        - Contoh: Snort atau Wazuh.
-
-    - Responsivitas:
-        - Desain: Wajib mobile-friendly dengan prinsip desain adaptif.
-        - Aksesibilitas: Memastikan aksesibilitas yang baik.
-    =========================================================================
-    -->
-
-    <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -53,10 +14,8 @@
       rel="stylesheet"
     />
 
-    <!-- Lucide Icons via CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Konfigurasi Kustom untuk Tailwind -->
     <script>
       tailwind.config = {
         theme: {
@@ -65,23 +24,64 @@
               sans: ["Inter", "sans-serif"],
             },
             colors: {
-              // Palet Warna Gradasi Merah Baru
-              "brand-primary": "#640D14", // Merah Tua Pekat
-              "brand-secondary": "#AD2831", // Merah Terang
-              "brand-accent": "#E63946", // Aksen Merah Cerah
-              "brand-light": "#FEF2F2", // Latar Belakang Merah Muda Pucat
+              // Palet Warna Kombinasi Merah-Biru yang lebih kontras dan modern
+              "brand-primary": "#1A237E", // Biru Tua
+              "brand-secondary": "#E53935", // Merah Cerah
+              "brand-accent": "#2979FF", // Biru Cerah
+              "brand-light": "#F3F6FB", // Biru Sangat Muda
+              // === GRADASI YANG DIPERBARUI (OPSI 2) ===
+              "brand-gradient":
+                "linear-gradient(90deg, #D32F2F 0%, #1A237E 100%)",
             },
           },
         },
       };
     </script>
 
-    <!-- Gaya Tambahan -->
-    <link rel="stylesheet" href="style.css" />
-    <script src="main.js" defer></script>
+    <style>
+      /* Style untuk Navigasi Aktif */
+      .nav-link.active {
+        color: #2979ff; /* brand-accent */
+        font-weight: 600;
+        position: relative;
+      }
+      .nav-link.active::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #2979ff; /* brand-accent */
+      }
+      .section-title {
+        background: linear-gradient(
+          90deg,
+          #e53935 0%,
+          #8e24aa 50%,
+          #1e88e5 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+        font-size: 1.875rem; /* text-3xl */
+        font-weight: 700; /* font-bold */
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+      .section-subtitle {
+        max-width: 48rem;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        color: #64748b; /* text-gray-600 */
+        margin-bottom: 3rem;
+        font-size: 1.125rem;
+      }
+    </style>
   </head>
   <body class="bg-brand-light font-sans text-gray-800">
-    <!-- ===== HEADER & NAVIGASI ===== -->
     <header
       id="header"
       class="bg-white/80 backdrop-blur-sm fixed top-0 left-0 w-full z-50 shadow-md transition-all duration-300"
@@ -89,11 +89,22 @@
       <div
         class="container mx-auto px-6 py-4 flex justify-between items-center"
       >
-        <a href="#home" class="text-2xl font-bold text-brand-primary">
-          MBC<span class="text-brand-secondary">Lab</span>
+        <a
+          href="#home"
+          class="flex items-center gap-4 text-2xl font-bold text-brand-primary"
+        >
+          <img
+            src="logo mbc.png"
+            class="h-20 w-auto object-contain"
+            alt="MBC Logo"
+          />
+          <img
+            src="NCM-logo-removebg-preview.png"
+            class="h-14 w-auto object-contain"
+            alt="NCM Logo"
+          />
         </a>
 
-        <!-- Navigasi Desktop -->
         <nav class="hidden md:flex items-center space-x-8">
           <a
             href="#home"
@@ -124,7 +135,6 @@
           Hubungi Kami
         </a>
 
-        <!-- Tombol Menu Mobile -->
         <button
           id="menu-btn"
           class="md:hidden text-brand-primary focus:outline-none"
@@ -133,7 +143,6 @@
         </button>
       </div>
 
-      <!-- Menu Mobile -->
       <div id="mobile-menu" class="hidden md:hidden">
         <nav class="px-6 pt-2 pb-4 space-y-2">
           <a
@@ -167,21 +176,21 @@
     </header>
 
     <main>
-      <!-- ===== BAGIAN 1: HALAMAN UTAMA (HOME) ===== -->
       <section id="home" class="pt-24 md:pt-32 pb-16 bg-white">
         <div class="container mx-auto px-6">
-          <!-- Hero Section -->
           <div class="text-center">
             <h1
-              class="text-4xl md:text-6xl font-extrabold text-brand-primary leading-tight mb-4"
+              class="text-4xl md:text-6xl font-extrabold text-brand-primary leading-tight mb-4 flex flex-col items-center"
             >
-              Inovasi Digital untuk
-              <span class="text-brand-secondary">Masa Depan</span>
+              <span class="text-brand-secondary"
+                >We're More Than Laboratory</span
+              >
+              <span class="text-brand-primary"
+                >We're Partners in Your Growth</span
+              >
             </h1>
             <p class="max-w-4xl mx-auto text-lg md:text-xl text-gray-600 mb-8">
-              MBC Laboratory mengubah data menjadi keputusan, ide menjadi
-              pengalaman, dan risiko menjadi keamanan melalui solusi teknologi
-              terdepan.
+              #GoGoMBC #WeAttack #WeProtect
             </p>
             <a
               href="#layanan"
@@ -191,7 +200,6 @@
             </a>
           </div>
 
-          <!-- Visi & Misi -->
           <div
             class="mt-20 md:mt-28 grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
           >
@@ -199,12 +207,16 @@
               <h2 class="text-3xl font-bold text-brand-primary mb-4">
                 Tentang MBC Laboratory
               </h2>
-              <p class="text-gray-600 mb-6">
-                Kami adalah laboratorium inovasi yang berfokus pada pengembangan
-                solusi teknologi canggih untuk menjawab tantangan industri
-                modern. Dengan tim ahli yang bersemangat, kami berkomitmen untuk
-                memberikan hasil yang tidak hanya memenuhi, tetapi melampaui
-                ekspektasi klien.
+              <p class="text-gray-600 mb-6 text-justify">
+                MBC Laboratory, singkatan dari Multimedia, Big Data, dan Cyber
+                Security Laboratory, merupakan salah satu entitas penelitian
+                yang beroperasi di bawah Kementerian Komunikasi dan Multimedia
+                (KK NCM). Fokus utama laboratorium ini adalah mempelajari dan
+                mengembangkan pengetahuan di bidang Cyber Security, Big Data,
+                dan Multimedia. Didirikan pada tanggal 4 Oktober 2019, MBC
+                Laboratory telah menjadi pusat penelitian yang berdedikasi untuk
+                memahami, mengatasi, dan mengembangkan solusi terkini dalam tiga
+                bidang utamanya.
               </p>
             </div>
             <div class="space-y-6">
@@ -213,39 +225,46 @@
                   class="text-2xl font-semibold text-brand-secondary mb-2 flex items-center gap-3"
                 >
                   <i data-lucide="eye" class="w-7 h-7 text-brand-accent"></i>
-                  Visi Kami
+                  Visi
                 </h3>
-                <p class="text-gray-600">
-                  Menjadi mitra inovasi digital terdepan di Indonesia yang
-                  mendorong transformasi dan pertumbuhan berkelanjutan bagi
-                  klien kami.
+                <p class="text-gray-600 text-justify">
+                  Menjadi Laboratorium unggulan dalam pengembangan teknologi
+                  Multimedia Application, Big Data, dan Cybersecurity dengan
+                  mendorong eksplorasi dan merancang riset yang memberikan
+                  dampak positif dan mengikuti perkembangan teknologi masa kini
+                  serta menjadi lingkungan yang membentuk, mematangkan, dan
+                  mempersiapkan skill asisten MBC Laboratory agar dapat bersaing
+                  di Industri.
                 </p>
               </div>
+
               <div>
                 <h3
                   class="text-2xl font-semibold text-brand-secondary mb-2 flex items-center gap-3"
                 >
                   <i data-lucide="target" class="w-7 h-7 text-brand-accent"></i>
-                  Misi Kami
+                  Misi
                 </h3>
-                <ul class="list-disc list-inside text-gray-600 space-y-1">
-                  <li>
-                    Mengembangkan solusi andal di bidang Cybersecurity, Big
-                    Data, Game Tech, dan GIS.
+                <ol class="list-decimal list-inside text-gray-600 space-y-1">
+                  <li class="text-justify">
+                    Menjadi lingkungan yang mendukung pembelajaran dan
+                    penelitian jangka panjang.
                   </li>
-                  <li>Menyediakan layanan konsultasi ahli untuk klien.</li>
-                  <li>
-                    Membangun ekosistem talenta digital yang kompeten dan
-                    berintegritas.
+                  <li class="text-justify">
+                    Menciptakan lingkungan yang fokus pada pertumbuhan pribadi
+                    dan profesional serta mendukung karier.
                   </li>
-                </ul>
+                  <li class="text-justify">
+                    Menjadi pusat informasi Teknologi, Multimedia, dan Softskill
+                    yang berguna bagi mahasiswa.
+                  </li>
+                </ol>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- ===== BAGIAN 2: DIVISI DAN LAYANAN ===== -->
       <section id="layanan" class="py-20">
         <div class="container mx-auto px-6">
           <h2 class="section-title">Divisi & Layanan Unggulan</h2>
@@ -255,7 +274,6 @@
             tujuan strategis.
           </p>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Kartu Layanan 1: Cybersecurity -->
             <div
               class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-t-4 border-brand-accent"
             >
@@ -271,15 +289,15 @@
                 Cybersecurity
               </h3>
               <p class="text-gray-600 mb-4">
-                Melindungi aset digital Anda dari ancaman siber dengan layanan
-                keamanan proaktif dan responsif.
+                Cyber security atau keamanan siber adalah tindakan perlindungan
+                perangkat, jaringan, program, dan data dari ancaman serangan
+                siber serta akses ilegal.
               </p>
               <p class="text-sm text-gray-500">
                 <b class="text-brand-secondary">Aplikasi:</b> Vulnerability
                 Assessment, Network Security, Digital Forensics.
               </p>
             </div>
-            <!-- Kartu Layanan 2: Big Data -->
             <div
               class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-t-4 border-brand-accent"
             >
@@ -295,15 +313,16 @@
                 Big Data
               </h3>
               <p class="text-gray-600 mb-4">
-                Mengubah kumpulan data besar menjadi wawasan yang dapat
-                ditindaklanjuti untuk keputusan cerdas.
+                Big data adalah kumpulan data yang sangat besar dan kompleks
+                yang terdiri dari data terstruktur, semi-terstruktur, dan tidak
+                terstruktur. Big data memiliki beberapa karakteristik, yaitu
+                volume, kecepatan, dan variasi
               </p>
               <p class="text-sm text-gray-500">
                 <b class="text-brand-secondary">Aplikasi:</b> Business
                 Intelligence, Predictive Analytics, Data Warehousing.
               </p>
             </div>
-            <!-- Kartu Layanan 3: Game Technology -->
             <div
               class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-t-4 border-brand-accent"
             >
@@ -319,15 +338,14 @@
                 Game Technology
               </h3>
               <p class="text-gray-600 mb-4">
-                Menciptakan pengalaman interaktif yang imersif melalui
-                gamifikasi, simulasi, dan VR.
+                Game tech atau teknologi game adalah teknologi yang digunakan
+                untuk mengembangkan dan memproduksi game.
               </p>
               <p class="text-sm text-gray-500">
                 <b class="text-brand-secondary">Aplikasi:</b> Corporate
                 Training, Gamified Marketing, VR Experiences.
               </p>
             </div>
-            <!-- Kartu Layanan 4: GIS -->
             <div
               class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-t-4 border-brand-accent"
             >
@@ -338,8 +356,10 @@
               </div>
               <h3 class="text-xl font-bold text-brand-primary mb-3">GIS</h3>
               <p class="text-gray-600 mb-4">
-                Memberikan konteks spasial pada data Anda untuk analisis
-                berbasis lokasi yang mendalam.
+                Sistem Informasi Geografis (Geographic Information System atau
+                GIS) adalah sebuah teknologi yang digunakan untuk mengumpulkan,
+                mengelola, menganalisis, dan memvisualisasikan data berbasis
+                lokasi atau geografis.
               </p>
               <p class="text-sm text-gray-500">
                 <b class="text-brand-secondary">Aplikasi:</b> Spatial Analysis,
@@ -350,7 +370,6 @@
         </div>
       </section>
 
-      <!-- ===== BAGIAN 3: HALAMAN KONTAK ===== -->
       <section id="kontak" class="py-20 bg-white">
         <div class="container mx-auto px-6">
           <h2 class="section-title">Hubungi Kami</h2>
@@ -360,7 +379,6 @@
             formulir kontak.
           </p>
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <!-- Informasi Kontak & Peta -->
             <div>
               <div class="space-y-6">
                 <div class="flex items-start gap-4">
@@ -403,9 +421,8 @@
                 </div>
               </div>
               <div class="mt-8 rounded-lg overflow-hidden shadow-lg">
-                <!-- Ganti URL ini dengan URL embed dari Google Maps Anda -->
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.576891381987!2d106.82458407475215!3d-6.187333393800236!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f42369415c57%3A0x76c33c563b74032!2sMonumen%20Nasional!5e0!3m2!1sid!2sid!4v1672560000000!5m2!1sid!2sid"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.308422476538!2d107.6293917750739!3d-6.972863193029431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e9adf177bf8d%3A0x437398556f0a51d!2sTelkom%20University!5e0!3m2!1sen!2sid!4v1689234567890!5m2!1sen!2sid"
                   width="100%"
                   height="300"
                   style="border: 0"
@@ -416,7 +433,6 @@
                 </iframe>
               </div>
             </div>
-            <!-- Formulir Kontak -->
             <div class="bg-brand-light p-8 rounded-xl shadow-inner border">
               <h3 class="text-2xl font-bold text-brand-primary mb-6">
                 Kirim Pesan Cepat
@@ -491,7 +507,6 @@
         </div>
       </section>
 
-      <!-- ===== BAGIAN 4: HALAMAN DEVELOPER ===== -->
       <section id="developer" class="py-20">
         <div class="container mx-auto px-6">
           <h2 class="section-title">Profil Pengembang</h2>
@@ -581,17 +596,13 @@
       </section>
     </main>
 
-    <!-- ===== FOOTER ===== -->
     <footer class="bg-brand-primary text-white">
       <div class="container mx-auto px-6 py-6 text-center">
-        <p>
-          &copy; <span id="year"></span> MBC Laboratory. All Rights Reserved.
-        </p>
+        <p>© <span id="year"></span> MBC Laboratory. All Rights Reserved.</p>
       </div>
     </footer>
 
-    <!-- ===== JAVASCRIPT ===== -->
-    <!-- <script>
+    <script>
       // Inisialisasi Lucide Icons
       lucide.createIcons();
 
@@ -624,7 +635,7 @@
           if (entry.isIntersecting) {
             navLinks.forEach((link) => {
               link.classList.remove("active");
-              if (link.getAttribute("href").substring(1) === entry.target.id) {
+              if (`#${entry.target.id}` === link.getAttribute("href")) {
                 link.classList.add("active");
               }
             });
@@ -638,6 +649,6 @@
 
       // Set tahun di footer secara dinamis
       document.getElementById("year").textContent = new Date().getFullYear();
-    </script> -->
+    </script>
   </body>
 </html>
