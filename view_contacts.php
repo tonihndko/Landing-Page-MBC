@@ -1,9 +1,10 @@
 <?php
 // Konfigurasi koneksi database
-$host = 'lna-server.mysql.database.azure.com';
-$user = 'unasitaihd';
-$pass = 'G2qJWI0ZhRwz6y$w';
-$db   = 'mbc_laboratory';
+$host = 'mbclaboratory-tonihandoko-server.mysql.database.azure.com';
+$user = 'cdxivmqnyw';
+$pass = 'qH2HfvqJYuBU$00l';
+$db   = 'mbclaboratory-tonihandoko-server';
+
 
 $conn = new mysqli($host, $user, $pass, $db);
 if ($conn->connect_error) {

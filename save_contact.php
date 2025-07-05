@@ -1,9 +1,9 @@
 <?php
 // Konfigurasi koneksi database (ganti sesuai setup XAMPP Anda)
-$host = 'mbclaboratory-tonihandoko';
+$host = 'mbclaboratory-tonihandoko-server.mysql.database.azure.com';
 $user = 'cdxivmqnyw';
 $pass = 'qH2HfvqJYuBU$00l';
-$db   = 'mbc_laboratory';
+$db   = 'mbclaboratory-tonihandoko-server';
 
 // Membuat koneksi
 $conn = new mysqli($host, $user, $pass, $db);
