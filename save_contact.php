@@ -1,8 +1,8 @@
 <?php
 // Konfigurasi koneksi database (ganti sesuai setup XAMPP Anda)
 $host = 'lna-server.mysql.database.azure.com';
-$user = 'zpsvrcdyhz';
-$pass = 'BBZY07Cxqsx$Aq4I';
+$user = 'unasitaihd';
+$pass = 'G2qJWI0ZhRwz6y$w';
 $db   = 'mbc_laboratory';
 
 // Membuat koneksi

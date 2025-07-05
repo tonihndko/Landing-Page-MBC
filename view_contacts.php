@@ -1,8 +1,8 @@
 <?php
 // Konfigurasi koneksi database
-$host = 'localhost';
-$user = 'root';
-$pass = 'BBZY07Cxqsx$Aq4I';
+$host = 'lna-server.mysql.database.azure.com';
+$user = 'unasitaihd';
+$pass = 'G2qJWI0ZhRwz6y$w';
 $db   = 'mbc_laboratory';
 
 $conn = new mysqli($host, $user, $pass, $db);
