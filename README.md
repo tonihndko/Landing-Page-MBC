@@ -24,17 +24,20 @@ Website landing page untuk MBC Laboratory, Telkom University.
 ## Instruksi Instalasi Lokal
 
 1. **Clone repository**
+
    ```bash
    git clone https://github.com/tonihndko/Landing-Page-MBC.git
    cd Landing-Page-MBC
    ```
 
 2. **Siapkan Web Server Lokal**
+
    - Gunakan XAMPP/Laragon/WAMP (pastikan Apache & MySQL aktif).
    - Letakkan semua file di folder `htdocs` (XAMPP) atau root web server Anda.
 
 3. **Konfigurasi Database**
-   - Buat database `mbc_laboratory` di MySQL.
+
+   - Buat database `mbclaboratory-tonihandoko-server` di MySQL.
    - Import tabel kontak:
      ```sql
      CREATE TABLE kontak (
@@ -57,18 +60,22 @@ Website landing page untuk MBC Laboratory, Telkom University.
 ## Instruksi Deployment ke Azure App Service
 
 1. **Siapkan Azure App Service (PHP)**
+
    - Buat App Service baru (runtime: PHP, misal 8.x).
    - Deploy semua file ke App Service (bisa via FTP, GitHub Actions, atau Azure CLI).
 
 2. **Siapkan Azure Database for MySQL**
+
    - Buat database dan user di Azure Database for MySQL.
-   - Catat host, username, password, dan nama database.
+   - Catat host (server name), username, password, dan nama database.
    - Pastikan firewall Azure MySQL mengizinkan koneksi dari App Service (Allow Azure services = Yes).
 
 3. **Konfigurasi Koneksi di App Service**
+
    - Edit file `save_contact.php` dan `view_contacts.php`:
-     - Ganti `$host`, `$user`, `$pass`, `$db` sesuai info Azure.
-     - Untuk user: gunakan format `username@hostname`.
+     - Ganti `$host` dengan server name dari Azure (misal: `mbclaboratory-tonihandoko-server.mysql.database.azure.com`).
+     - Ganti `$user` dengan format `username@hostname` (misal: `cdxivmqnyw@mbclaboratory-tonihandoko-server`).
+     - Ganti `$pass` dan `$db` sesuai info Azure.
    - (Rekomendasi) Simpan kredensial di Application Settings Azure, lalu akses dengan `getenv()` di PHP.
 
 4. **Konfigurasi SSL (HTTPS)**
@@ -88,11 +95,16 @@ Website landing page untuk MBC Laboratory, Telkom University.
 ---
 
 ## Catatan Tambahan
+
 - Pastikan file gambar (logo, foto profil) ada di root folder.
 - Untuk keamanan, jangan hardcode password di file PHP pada production. Gunakan environment variable.
 - Jika ingin menambah fitur, gunakan best practice PHP dan sanitasi input user.
+- Untuk host, user, pass, dan db:
+  - **Host:** Lihat di Azure Portal, bagian Overview resource MySQL Anda (Server name).
+  - **User:** Username yang Anda buat di Azure, biasanya format `username@hostname`.
+  - **Pass:** Password yang Anda buat saat setup database (bisa di-reset di Azure Portal jika lupa).
+  - **DB:** Nama database yang Anda buat di menu Databases pada resource MySQL Azure.
 
 ---
 
 **Author:** Toni Handoko
-
